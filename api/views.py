@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .utils import get_pokemon, get_pokemon_page
+from .utils import get_pokemon_page
 
 # Create your views here.
 
