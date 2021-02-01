@@ -1,8 +1,8 @@
 import requests
 
 
-def get_pokemon(url):
-    response = requests.get(url)
+def get_pokemon(name):
+    response = requests.get(f'https://pokeapi.co/api/v2/pokemon/{name}/')
     data = response.json()
     pokemon_data = {
         "name": '',
@@ -31,7 +31,7 @@ def get_pokemon_page(offset, limit):
     pokemons = []
 
     for pokemon in data['results']:
-        pokemon_data = get_pokemon(pokemon['url'])
+        pokemon_data = get_pokemon(pokemon['name'])
         pokemons.append(pokemon_data)
 
     next_offset = offset + limit
