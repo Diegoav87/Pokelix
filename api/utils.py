@@ -1,8 +1,7 @@
 import requests
 
 
-def get_pokemon(id):
-    url = f'https://pokeapi.co/api/v2/pokemon/{id}/'
+def get_pokemon(url):
     response = requests.get(url)
     data = response.json()
     pokemon_data = {
@@ -26,10 +25,32 @@ def get_pokemon(id):
 
 
 def get_pokemon_page(offset, limit):
+    url = f'https://pokeapi.co/api/v2/pokemon/?offset={offset}&limit={limit}'
+    response = requests.get(url)
+    data = response.json()
     pokemons = []
 
-    for i in range(offset, limit + 1):
-        pokemon = get_pokemon(i)
-        pokemons.append(pokemon)
+    for pokemon in data['results']:
+        pokemon_data = get_pokemon(pokemon['url'])
+        pokemons.append(pokemon_data)
 
-    return pokemons
+    next_offset = offset + limit
+    previous_offset = offset - limit
+
+    pokemon_results = {
+        'results': pokemons
+    }
+
+    if next_offset <= 1118:
+        pokemon_results[
+            'next'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset + limit}&limit={limit}'
+    else:
+        pokemon_results['next'] = None
+
+    if previous_offset >= 0:
+        pokemon_results[
+            'previous'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset - limit}&limit={limit}'
+    else:
+        pokemon_results['previous'] = None
+
+    return pokemon_results

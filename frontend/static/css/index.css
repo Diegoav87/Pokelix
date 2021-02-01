@@ -1,0 +1,16 @@
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}

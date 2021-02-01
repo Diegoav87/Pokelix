@@ -11,5 +11,11 @@ def pokemon_list(request):
     limit = request.GET.get('limit')
     offset = request.GET.get('offset')
 
+    print(limit, offset)
+
+    if offset == None or limit == None:
+        offset = 0
+        limit = 12
+
     data = get_pokemon_page(int(offset), int(limit))
     return Response(data)
