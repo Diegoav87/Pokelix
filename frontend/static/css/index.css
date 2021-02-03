@@ -1,3 +1,7 @@
+body {
+  background-color: #f0efeb;
+}
+
 .container {
   width: 80%;
   margin: auto;
@@ -13,4 +17,50 @@
   position: absolute;
   top: 50%;
   left: 50%;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background-color: white;
+  -webkit-box-shadow: 5px 1px 21px -6px #000000;
+  box-shadow: 5px 1px 21px -6px #000000;
+}
+
+.data-grid {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: lightseagreen;
+  color: white;
+  margin-bottom: 30px;
+}
+
+.poke-img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.stat-container {
+  margin: 10px;
+  padding: 20px;
+}
+
+.pokemon-data-grid {
+  background-color: lightseagreen;
+  color: white;
+  padding: 20px;
+}
+
+.types {
+  display: flex;
+  justify-content: center;
+}
+
+.type-span {
+  background-color: blue;
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
 }
