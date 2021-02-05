@@ -20,12 +20,11 @@ body {
 }
 
 .pokemon-grid {
+  margin-top: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 50px;
-  background-color: white;
-  -webkit-box-shadow: 5px 1px 21px -6px #000000;
-  box-shadow: 5px 1px 21px -6px #000000;
+  background-color: #f9f9f9;
 }
 
 .data-grid {
@@ -55,7 +54,7 @@ body {
 
 .types {
   display: flex;
-  justify-content: center;
+  justify-content: start;
 }
 
 .type-span {

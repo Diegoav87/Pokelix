@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Grid, Typography, LinearProgress } from '@material-ui/core';
+import { Grid, Typography, LinearProgress, CircularProgress } from '@material-ui/core';
 
 const PokemonPage = (props) => {
     const { name } = useParams();
@@ -9,8 +9,10 @@ const PokemonPage = (props) => {
     const [sprite, setSprite] = useState('');
     const [types, setTypes] = useState([]);
     const [stats, setStats] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const fetchPokemon = (url) => {
+        setLoading(true);
         fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -20,6 +22,7 @@ const PokemonPage = (props) => {
             setSprite(data['sprite']);
             setTypes(data['types']);
             setStats(data['stats']);
+            setLoading(false);
         })
     }
 
@@ -49,23 +52,30 @@ const PokemonPage = (props) => {
     return (
         <div className='container'>
             <Typography variant='h1'>{name}</Typography>
-            <div class="pokemon-grid">
-                <div className="poke-img-container">
-                    <img className="poke-img" src={sprite}></img>
-                </div>
-                <div className='pokemon-data-grid'>
-                    <h5>Height: {height}</h5>
-                    <h5>Weight: {weight}</h5>
-                    <h5>Types</h5>
-                    <div className="types">
-                        {typeArr}
+            {loading ? (<div className="spinner">
+                    <CircularProgress />
+                </div>) : (
+                    <div>
+                        <div class="pokemon-grid">
+                            <div className="poke-img-container">
+                                <img className="poke-img" src={sprite}></img>
+                            </div>
+                            <div className='pokemon-data-grid'>
+                                <h5>Height: {height}</h5>
+                                <h5>Weight: {weight}</h5>
+                                <h5>Types</h5>
+                                <div className="types">
+                                    {typeArr}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="data-grid">
+                            <h3>Base Stats</h3>
+                            {progressBars}
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div className="data-grid">
-                <h3>Base Stats</h3>
-                {progressBars}
-            </div>
+                )}
+            
         </div>
     )
 }
