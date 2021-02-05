@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid, Typography, LinearProgress, CircularProgress } from '@material-ui/core';
+import Navigation from '../Navbar/Navbar.js';
 
 const PokemonPage = (props) => {
     const { name } = useParams();
@@ -50,32 +51,35 @@ const PokemonPage = (props) => {
     })
 
     return (
-        <div className='container'>
-            <Typography variant='h1'>{name}</Typography>
-            {loading ? (<div className="spinner">
-                    <CircularProgress />
-                </div>) : (
-                    <div>
-                        <div class="pokemon-grid">
-                            <div className="poke-img-container">
-                                <img className="poke-img" src={sprite}></img>
-                            </div>
-                            <div className='pokemon-data-grid'>
-                                <h5>Height: {height}</h5>
-                                <h5>Weight: {weight}</h5>
-                                <h5>Types</h5>
-                                <div className="types">
-                                    {typeArr}
+        <div>
+            <Navigation />
+            <div className='container'>
+                <Typography variant='h1'>{name}</Typography>
+                {loading ? (<div className="spinner">
+                        <CircularProgress />
+                    </div>) : (
+                        <div>
+                            <div class="pokemon-grid">
+                                <div className="poke-img-container">
+                                    <img className="poke-img" src={sprite}></img>
+                                </div>
+                                <div className='pokemon-data-grid'>
+                                    <h5>Height: {height}</h5>
+                                    <h5>Weight: {weight}</h5>
+                                    <h5>Types</h5>
+                                    <div className="types">
+                                        {typeArr}
+                                    </div>
                                 </div>
                             </div>
+                            <div className="data-grid">
+                                <h3>Base Stats</h3>
+                                {progressBars}
+                            </div>
                         </div>
-                        <div className="data-grid">
-                            <h3>Base Stats</h3>
-                            {progressBars}
-                        </div>
-                    </div>
-                )}
-            
+                    )}
+                
+            </div>
         </div>
     )
 }
