@@ -1,0 +1,1 @@
+web: gunicorn pokelix.wsgi --log-file
