@@ -138,5 +138,6 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://pokelix.herokuapp.com/",
+    "http://127.0.0.1:8000",
+    "https://pokelix.herokuapp.com",
 ]
