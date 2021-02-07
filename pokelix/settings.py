@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import dotenv
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +30,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = ['pokelix.herokuapp.com', '127.0.0.1']
 
@@ -154,3 +155,5 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
     "https://pokelix.herokuapp.com",
 ]
+
+django_heroku.settings(locals())

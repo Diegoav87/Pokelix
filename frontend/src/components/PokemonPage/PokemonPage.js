@@ -28,7 +28,12 @@ const PokemonPage = (props) => {
     }
 
     useEffect(() => {
-        const url = `http://127.0.0.1:8000/api/get-pokemon/${name}/`;
+        let url = `http://127.0.0.1:8000/api/get-pokemon/${name}/`;
+
+        if (process.env.NODE_ENV === 'production') {
+            url = `https://pokelix.herokuapp.com/api/get-pokemon/${name}/`;
+        }
+
         fetchPokemon(url);
     }, [])
 

@@ -1,4 +1,5 @@
 import requests
+from django.conf import settings
 
 
 def get_pokemon(name):
@@ -45,16 +46,29 @@ def get_pokemon_page(offset, limit):
         'results': pokemons
     }
 
-    if next_offset <= 1118:
-        pokemon_results[
-            'next'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset + limit}&limit={limit}'
-    else:
-        pokemon_results['next'] = None
+    if settings.DEBUG:
+        if next_offset <= 1118:
+            pokemon_results[
+                'next'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset + limit}&limit={limit}'
+        else:
+            pokemon_results['next'] = None
 
-    if previous_offset >= 0:
-        pokemon_results[
-            'previous'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset - limit}&limit={limit}'
+        if previous_offset >= 0:
+            pokemon_results[
+                'previous'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset - limit}&limit={limit}'
+        else:
+            pokemon_results['previous'] = None
     else:
-        pokemon_results['previous'] = None
+        if next_offset <= 1118:
+            pokemon_results[
+                'next'] = f'https://pokelix.herokuapp.com/api/pokemon-list/?offset={offset + limit}&limit={limit}'
+        else:
+            pokemon_results['next'] = None
+
+        if previous_offset >= 0:
+            pokemon_results[
+                'previous'] = f'https://pokelix.herokuapp.com/api/pokemon-list/?offset={offset - limit}&limit={limit}'
+        else:
+            pokemon_results['previous'] = None
 
     return pokemon_results

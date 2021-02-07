@@ -30,7 +30,12 @@ const PokemonList = () => {
     }
 
     useEffect(() => {
-        const url = 'http://127.0.0.1:8000/api/pokemon-list/';
+        let url = 'http://127.0.0.1:8000/api/pokemon-list/';
+
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://pokelix.herokuapp.com/api/pokemon-list/';
+        }
+
         fetchPokemons(url);
     }, [])
 
