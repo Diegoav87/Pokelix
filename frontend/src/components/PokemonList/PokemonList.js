@@ -57,7 +57,12 @@ const PokemonList = () => {
     }
 
     const handleSearchPress = () => {
-        const url = `http://127.0.0.1:8000/api/get-pokemon/${searchPokemon}/`;
+        let url = `http://127.0.0.1:8000/api/get-pokemon/${searchPokemon}/`;
+
+        if (process.env.NODE_ENV === 'production') {
+            url = `https://pokelix.herokuapp.com/api/get-pokemon/${searchPokemon}/`;
+        }
+
         fetch(url)
         .then(response => {
             if (response.ok) {
