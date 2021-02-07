@@ -46,7 +46,7 @@ def get_pokemon_page(offset, limit):
         'results': pokemons
     }
 
-    if settings.DEBUG:
+    if settings.DEBUG == 'True':
         if next_offset <= 1118:
             pokemon_results[
                 'next'] = f'http://127.0.0.1:8000/api/pokemon-list/?offset={offset + limit}&limit={limit}'

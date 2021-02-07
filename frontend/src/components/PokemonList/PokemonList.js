@@ -17,6 +17,7 @@ const PokemonList = () => {
     const [searchError, setSearchError] = useState(false);
 
     const fetchPokemons = (url) => {
+        console.log(url)
         setLoading(true);
         fetch(url)
         .then(response => response.json())
